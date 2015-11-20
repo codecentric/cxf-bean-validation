@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="TestWebServiceImplService" targetNamespace="http://test/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://test/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+<xs:schema xmlns:tns="http://test/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://test/" version="1.0">
+
+  <xs:element name="doTest" type="tns:doTest"/>
+
+  <xs:element name="doTestResponse" type="tns:doTestResponse"/>
+
+  <xs:element name="getTestDTO" type="tns:getTestDTO"/>
+
+  <xs:element name="getTestDTOResponse" type="tns:getTestDTOResponse"/>
+
+  <xs:complexType name="getTestDTO">
+    <xs:sequence>
+      <xs:element name="testId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTestDTOResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:testDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="testDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="lengthCheck" type="xs:string"/>
+      <xs:element name="number" type="xs:int"/>
+      <xs:element minOccurs="0" name="patternCheck" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="doTest">
+    <xs:sequence>
+      <xs:element name="testInput" type="tns:testDTO"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="doTestResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getTestDTOResponse">
+    <wsdl:part name="parameters" element="tns:getTestDTOResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTestDTO">
+    <wsdl:part name="parameters" element="tns:getTestDTO">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="doTest">
+    <wsdl:part name="parameters" element="tns:doTest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="doTestResponse">
+    <wsdl:part name="parameters" element="tns:doTestResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="TestWebService">
+    <wsdl:operation name="getTestDTO">
+      <wsdl:input name="getTestDTO" message="tns:getTestDTO">
+    </wsdl:input>
+      <wsdl:output name="getTestDTOResponse" message="tns:getTestDTOResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doTest">
+      <wsdl:input name="doTest" message="tns:doTest">
+    </wsdl:input>
+      <wsdl:output name="doTestResponse" message="tns:doTestResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TestWebServiceImplServiceSoapBinding" type="tns:TestWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getTestDTO">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getTestDTO">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTestDTOResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doTest">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="doTest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="doTestResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TestWebServiceImplService">
+    <wsdl:port name="TestWebServiceImplPort" binding="tns:TestWebServiceImplServiceSoapBinding">
+      <soap:address location="http://localhost:9090/TestWebServiceImplPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
